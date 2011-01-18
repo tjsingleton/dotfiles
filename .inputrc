@@ -1,0 +1,3 @@
+$if Ruby
+  "\C-x\C-p": "puts \"So many keystrokes. So little time.\"\n"
+$endif

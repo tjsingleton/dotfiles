@@ -1,0 +1,7 @@
+shell ${SHELL}
+termcapinfo xterm-color kD=\E[3~
+hardstatus off
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %m-%d %{W}%c %{g}]'
+startup_message off
+defscrollback 5000
