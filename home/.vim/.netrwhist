@@ -1,7 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/tjsingleton'
-let g:netrw_dirhist_2='/Users/tjsingleton/.rvm/gems/ruby-1.9.2-p0@crunch/bundler/gems/arturo-7b8fab267ece'
-let g:netrw_dirhist_3='/Users/tjsingleton/Projects/crunch/rails'
-let g:netrw_dirhist_4='/Users/tjsingleton/Projects/crunch/rails/app/models/user'
-let g:netrw_dirhist_5='/usr/local/Cellar/php/5.3.3/etc'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/tjsingleton/Projects/crunch/echo/new/src'
