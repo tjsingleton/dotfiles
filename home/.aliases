@@ -1,6 +1,4 @@
 alias ls="ls -h"
-alias ll="ls -lhs -G"
-alias la="ls -lha -G"
 
 alias cls='clear; ls'
 
