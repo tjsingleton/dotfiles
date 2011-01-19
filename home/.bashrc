@@ -1,4 +1,4 @@
-source ~/.bash_aliases
+source $HOME/.aliases
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion

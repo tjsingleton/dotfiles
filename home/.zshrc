@@ -47,7 +47,7 @@ done
 PR_NO_COLOR="%{$terminfo[sgr0]%}"
 PS1="$PR_BLUE%~ $PR_WHITE$PR_NO_COLOR\$ " # Custom Prompt settings
 RPS1="$PR_LIGHT_YELLOW(%D{%m-%d %H:%M})$PR_NO_COLOR"
-PATH="$HOME/bin:/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/Cellar/php/5.3.3/bin/"
+PATH="./bin:$HOME/bin:/usr/local/bin:$PATH:/usr/local/share/npm/bin:/usr/local/Cellar/php/5.3.3/bin/"
 NODE_PATH="/usr/local/lib/node"
 TZ="America/New_York"
 HISTFILE=$HOME/.zhistory
@@ -140,3 +140,4 @@ compinit
 # zstyle '*' single-ignored show
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+source $HOME/.aliases
