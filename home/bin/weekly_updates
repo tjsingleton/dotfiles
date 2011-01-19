@@ -1,6 +1,0 @@
-brew update
-brew upgrade
-brew cleanup
-rvm update --head
-rvm reload
-rvm gem update
