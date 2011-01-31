@@ -1,1 +1,2 @@
 color railscasts2
+nmap <SPACE> <SPACE>:noh<CR>
