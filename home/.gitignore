@@ -31,3 +31,5 @@
 .idea
 .yardoc
 *.iml
+*.ipr
+*.iws
