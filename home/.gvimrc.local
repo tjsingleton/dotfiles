@@ -1,2 +1,3 @@
-color railscasts2
-nmap <SPACE> <SPACE>:noh<CR>
+so ~/.vimrc.local
+map <D-1> :NERDTreeToggle<CR>
+au FocusLost * :write
