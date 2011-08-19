@@ -10,22 +10,9 @@ alias carbon_dig="dig @ns1.funeralfuturist.net "
 
 # git
 alias gpull="git stash && git pull --rebase && git stash pop"
-alias gpush="gpull && git push"
 
-# Handle automatic bundle exec
-bundle_commands=( spec rspec cucumber cap watchr rails rackup )
-
-function run_bundler_cmd () {
-    if [ -e ./Gemfile ]; then
-        echo "bundle exec $@"
-        bundle exec $@
-    else
-        echo "$@"
-        $@
-    fi
-}
-
-for cmd in $bundle_commands
-do
-    alias $cmd="run_bundler_cmd $cmd"
-done
+alias external_ip="curl icanhazip.com"
+alias pru="rvm default exec pru"
+alias lunchy="rvm default exec lunchy"
+alias pt="rvm default exec pt"
+alias ss="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
