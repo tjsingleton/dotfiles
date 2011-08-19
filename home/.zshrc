@@ -13,3 +13,9 @@ unsetopt auto_name_dirs # FIX RVM
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 source $HOME/.aliases
+
+# Me
+unsetopt correct
+unsetopt correctall
+setopt histnostore
+setopt histignoredups
