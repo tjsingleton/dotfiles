@@ -3,7 +3,7 @@
 *.pdf
 .DS_Store
 *.tmproj
-*.zip
+# *.zip
 .com.apple.*
 [core]
 
@@ -29,7 +29,12 @@
 */tmp/tests/*
 
 .idea
+rails.ids
 .yardoc
 *.iml
 *.ipr
 *.iws
+
+.pt
+
+out
