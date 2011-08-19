@@ -21,8 +21,4 @@ BRIGHT_WHITE="\[\033[1;37m\]"
 export PS1="$BLUE\w $BRIGHT_YELLOW\$(__git_ps1) $BRIGHT_WHITE\$ "
 export PS2=": "
 
-
-# export ARCHFLAGS="-arch x86_64"
 export rvm_cd_complete_flag=1
-
-set -o vi
