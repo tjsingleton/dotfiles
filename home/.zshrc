@@ -1,10 +1,7 @@
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="eastwood"
+export ZSH_THEME="sunaku"
 
-# Comment this out to disable weekly auto-update checks
-# export DISABLE_AUTO_UPDATE="true"
-
-plugins=(git brew gem rails3)
+plugins=(git brew gem rails3 redis-cli rvm vagrant npm knife osx)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.profile
