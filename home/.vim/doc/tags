@@ -70,8 +70,12 @@
 'solarized_visibility'	solarized.txt	/*'solarized_visibility'*
 'syntastic_auto_jump'	syntastic.txt	/*'syntastic_auto_jump'*
 'syntastic_auto_loc_list'	syntastic.txt	/*'syntastic_auto_loc_list'*
-'syntastic_disabled_filetypes'	syntastic.txt	/*'syntastic_disabled_filetypes'*
+'syntastic_check_on_open'	syntastic.txt	/*'syntastic_check_on_open'*
+'syntastic_echo_current_error'	syntastic.txt	/*'syntastic_echo_current_error'*
+'syntastic_enable_balloons'	syntastic.txt	/*'syntastic_enable_balloons'*
+'syntastic_enable_highlighting'	syntastic.txt	/*'syntastic_enable_highlighting'*
 'syntastic_enable_signs'	syntastic.txt	/*'syntastic_enable_signs'*
+'syntastic_mode_map'	syntastic.txt	/*'syntastic_mode_map'*
 'syntastic_quiet_warnings'	syntastic.txt	/*'syntastic_quiet_warnings'*
 'syntastic_stl_format'	syntastic.txt	/*'syntastic_stl_format'*
 .snippet	snipMate.txt	/*.snippet*
@@ -80,10 +84,14 @@
 :AckAdd	ack.txt	/*:AckAdd*
 :AckFile	ack.txt	/*:AckFile*
 :AckFromSearch	ack.txt	/*:AckFromSearch*
+:CoffeeCompile	coffee-script.txt	/*:CoffeeCompile*
+:CoffeeMake	coffee-script.txt	/*:CoffeeMake*
+:CoffeeRun	coffee-script.txt	/*:CoffeeRun*
 :CommandT	command-t.txt	/*:CommandT*
 :CommandTBuffer	command-t.txt	/*:CommandTBuffer*
 :CommandTFlush	command-t.txt	/*:CommandTFlush*
 :Errors	syntastic.txt	/*:Errors*
+:Gist	gist-vim.txt	/*:Gist*
 :LAck	ack.txt	/*:LAck*
 :LAckAdd	ack.txt	/*:LAckAdd*
 :NERDTree	NERD_tree.txt	/*:NERDTree*
@@ -92,8 +100,9 @@
 :NERDTreeFromBookmark	NERD_tree.txt	/*:NERDTreeFromBookmark*
 :NERDTreeMirror	NERD_tree.txt	/*:NERDTreeMirror*
 :NERDTreeToggle	NERD_tree.txt	/*:NERDTreeToggle*
-:SyntasticDisable	syntastic.txt	/*:SyntasticDisable*
-:SyntasticEnable	syntastic.txt	/*:SyntasticEnable*
+:SyntasticCheck	syntastic.txt	/*:SyntasticCheck*
+:SyntasticErrors	syntastic.txt	/*:SyntasticErrors*
+:SyntasticToggleMode	syntastic.txt	/*:SyntasticToggleMode*
 :TlistAddFiles	taglist.txt	/*:TlistAddFiles*
 :TlistAddFilesRecursive	taglist.txt	/*:TlistAddFilesRecursive*
 :TlistClose	taglist.txt	/*:TlistClose*
@@ -229,6 +238,7 @@ ZoomWin.txt	ZoomWin.txt	/*ZoomWin.txt*
 [b	unimpaired.txt	/*[b*
 [e	unimpaired.txt	/*[e*
 [l	unimpaired.txt	/*[l*
+[n	unimpaired.txt	/*[n*
 [o	unimpaired.txt	/*[o*
 [q	unimpaired.txt	/*[q*
 [t	unimpaired.txt	/*[t*
@@ -248,6 +258,7 @@ ZoomWin.txt	ZoomWin.txt	/*ZoomWin.txt*
 ]b	unimpaired.txt	/*]b*
 ]e	unimpaired.txt	/*]e*
 ]l	unimpaired.txt	/*]l*
+]n	unimpaired.txt	/*]n*
 ]o	unimpaired.txt	/*]o*
 ]q	unimpaired.txt	/*]q*
 ]t	unimpaired.txt	/*]t*
@@ -260,6 +271,7 @@ ZoomWin.txt	ZoomWin.txt	/*ZoomWin.txt*
 aI	indent-object.txt	/*aI*
 ack	ack.txt	/*ack*
 ack-author	ack.txt	/*ack-author*
+ack-mappings	ack.txt	/*ack-mappings*
 ack.txt	ack.txt	/*ack.txt*
 ai	indent-object.txt	/*ai*
 align	Align.txt	/*align*
@@ -347,6 +359,14 @@ alignmap-t~	Align.txt	/*alignmap-t~*
 alignmaps	Align.txt	/*alignmaps*
 alignusage	Align.txt	/*alignusage*
 before	solarized.txt	/*before*
+coffee-script	coffee-script.txt	/*coffee-script*
+coffee-script-author	coffee-script.txt	/*coffee-script-author*
+coffee-script-commands	coffee-script.txt	/*coffee-script-commands*
+coffee-script-contents	coffee-script.txt	/*coffee-script-contents*
+coffee-script-introduction	coffee-script.txt	/*coffee-script-introduction*
+coffee-script-license	coffee-script.txt	/*coffee-script-license*
+coffee-script-settings	coffee-script.txt	/*coffee-script-settings*
+coffee-script.txt	coffee-script.txt	/*coffee-script.txt*
 command-t	command-t.txt	/*command-t*
 command-t-authors	command-t.txt	/*command-t-authors*
 command-t-commands	command-t.txt	/*command-t-commands*
@@ -365,6 +385,7 @@ command-t-usage	command-t.txt	/*command-t-usage*
 command-t-website	command-t.txt	/*command-t-website*
 command-t-wildignore	command-t.txt	/*command-t-wildignore*
 command-t.txt	command-t.txt	/*command-t.txt*
+compiler-coffee-script	coffee-script.txt	/*compiler-coffee-script*
 config/rails.vim	rails.txt	/*config\/rails.vim*
 conque_term-bugs	conque_term.txt	/*conque_term-bugs*
 conque_term-changelog	conque_term.txt	/*conque_term-changelog*
@@ -375,6 +396,7 @@ conque_term-todo	conque_term.txt	/*conque_term-todo*
 conque_term-usage	conque_term.txt	/*conque_term-usage*
 cs	surround.txt	/*cs*
 ds	surround.txt	/*ds*
+ft-coffee-script-syntax	coffee-script.txt	/*ft-coffee-script-syntax*
 ft-gitcommit-plugin	ft-gitcommit-plugin.txt	/*ft-gitcommit-plugin*
 fugitive	fugitive.txt	/*fugitive*
 fugitive#statusline()	fugitive.txt	/*fugitive#statusline()*
@@ -434,6 +456,7 @@ g:CommandTCursorRightMap	command-t.txt	/*g:CommandTCursorRightMap*
 g:CommandTCursorStartMap	command-t.txt	/*g:CommandTCursorStartMap*
 g:CommandTDeleteMap	command-t.txt	/*g:CommandTDeleteMap*
 g:CommandTMatchWindowAtTop	command-t.txt	/*g:CommandTMatchWindowAtTop*
+g:CommandTMatchWindowReverse	command-t.txt	/*g:CommandTMatchWindowReverse*
 g:CommandTMaxDepth	command-t.txt	/*g:CommandTMaxDepth*
 g:CommandTMaxFiles	command-t.txt	/*g:CommandTMaxFiles*
 g:CommandTMaxHeight	command-t.txt	/*g:CommandTMaxHeight*
@@ -444,6 +467,7 @@ g:CommandTSelectPrevMap	command-t.txt	/*g:CommandTSelectPrevMap*
 g:CommandTToggleFocusMap	command-t.txt	/*g:CommandTToggleFocusMap*
 g:SuperTabCompletionContexts	supertab.txt	/*g:SuperTabCompletionContexts*
 g:SuperTabContextDefaultCompletionType	supertab.txt	/*g:SuperTabContextDefaultCompletionType*
+g:SuperTabCrClosePreview	supertab.txt	/*g:SuperTabCrClosePreview*
 g:SuperTabCrMapping	supertab.txt	/*g:SuperTabCrMapping*
 g:SuperTabDefaultCompletionType	supertab.txt	/*g:SuperTabDefaultCompletionType*
 g:SuperTabLongestEnhanced	supertab.txt	/*g:SuperTabLongestEnhanced*
@@ -454,6 +478,8 @@ g:SuperTabMappingTabLiteral	supertab.txt	/*g:SuperTabMappingTabLiteral*
 g:SuperTabNoCompleteAfter	supertab.txt	/*g:SuperTabNoCompleteAfter*
 g:SuperTabNoCompleteBefore	supertab.txt	/*g:SuperTabNoCompleteBefore*
 g:SuperTabRetainCompletionDuration	supertab.txt	/*g:SuperTabRetainCompletionDuration*
+g:coffee_compile_vert	coffee-script.txt	/*g:coffee_compile_vert*
+g:coffee_make_options	coffee-script.txt	/*g:coffee_make_options*
 g:loaded_rails	rails.txt	/*g:loaded_rails*
 g:rails_abbreviations	rails.txt	/*g:rails_abbreviations*
 g:rails_ctags_arguments	rails.txt	/*g:rails_ctags_arguments*
@@ -463,7 +489,6 @@ g:rails_history_size	rails.txt	/*g:rails_history_size*
 g:rails_mappings	rails.txt	/*g:rails_mappings*
 g:rails_menu	rails.txt	/*g:rails_menu*
 g:rails_modelines	rails.txt	/*g:rails_modelines*
-g:rails_statusline	rails.txt	/*g:rails_statusline*
 g:rails_syntax	rails.txt	/*g:rails_syntax*
 g:rails_tabstop	rails.txt	/*g:rails_tabstop*
 g:rails_url	rails.txt	/*g:rails_url*
@@ -472,6 +497,7 @@ g:snips_author	snipMate.txt	/*g:snips_author*
 gist-vim-install	gist-vim.txt	/*gist-vim-install*
 gist-vim-license	gist-vim.txt	/*gist-vim-license*
 gist-vim-requirements	gist-vim.txt	/*gist-vim-requirements*
+gist-vim-thanks	gist-vim.txt	/*gist-vim-thanks*
 gist-vim-tips	gist-vim.txt	/*gist-vim-tips*
 gist-vim-usage	gist-vim.txt	/*gist-vim-usage*
 iI	indent-object.txt	/*iI*
@@ -500,8 +526,6 @@ rails-'pa'	rails.txt	/*rails-'pa'*
 rails-'path'	rails.txt	/*rails-'path'*
 rails-'shiftwidth'	rails.txt	/*rails-'shiftwidth'*
 rails-'softtabstop'	rails.txt	/*rails-'softtabstop'*
-rails-'statusline'	rails.txt	/*rails-'statusline'*
-rails-'stl'	rails.txt	/*rails-'stl'*
 rails-'sts'	rails.txt	/*rails-'sts'*
 rails-'sua'	rails.txt	/*rails-'sua'*
 rails-'suffixesadd'	rails.txt	/*rails-'suffixesadd'*
@@ -564,6 +588,7 @@ rails-:Rpreview!	rails.txt	/*rails-:Rpreview!*
 rails-:Rrefresh	rails.txt	/*rails-:Rrefresh*
 rails-:Rrefresh!	rails.txt	/*rails-:Rrefresh!*
 rails-:Rrunner	rails.txt	/*rails-:Rrunner*
+rails-:Rschema	rails.txt	/*rails-:Rschema*
 rails-:Rscript	rails.txt	/*rails-:Rscript*
 rails-:Rserver	rails.txt	/*rails-:Rserver*
 rails-:Rserver!	rails.txt	/*rails-:Rserver!*
@@ -592,6 +617,7 @@ rails-gf	rails.txt	/*rails-gf*
 rails-global-settings	rails.txt	/*rails-global-settings*
 rails-integration	rails.txt	/*rails-integration*
 rails-introduction	rails.txt	/*rails-introduction*
+rails-license	rails.txt	/*rails-license*
 rails-menu	rails.txt	/*rails-menu*
 rails-migrations	rails.txt	/*rails-migrations*
 rails-modelines	rails.txt	/*rails-modelines*
@@ -658,6 +684,7 @@ supertab-contextdefault	supertab.txt	/*supertab-contextdefault*
 supertab-contextdiscover	supertab.txt	/*supertab-contextdiscover*
 supertab-contextexample	supertab.txt	/*supertab-contextexample*
 supertab-contexttext	supertab.txt	/*supertab-contexttext*
+supertab-crclosepreview	supertab.txt	/*supertab-crclosepreview*
 supertab-crmapping	supertab.txt	/*supertab-crmapping*
 supertab-defaultcompletion	supertab.txt	/*supertab-defaultcompletion*
 supertab-duration	supertab.txt	/*supertab-duration*
@@ -671,7 +698,6 @@ supertab-preventcomplete	supertab.txt	/*supertab-preventcomplete*
 supertab-usage	supertab.txt	/*supertab-usage*
 supertab.txt	supertab.txt	/*supertab.txt*
 surround	surround.txt	/*surround*
-surround-author	surround.txt	/*surround-author*
 surround-customizing	surround.txt	/*surround-customizing*
 surround-issues	surround.txt	/*surround-issues*
 surround-mappings	surround.txt	/*surround-mappings*
@@ -737,8 +763,6 @@ v_]x	unimpaired.txt	/*v_]x*
 v_]y	unimpaired.txt	/*v_]y*
 vgS	surround.txt	/*vgS*
 vim-colors-solarized	solarized.txt	/*vim-colors-solarized*
-vmp.txt	vmp.txt	/*vmp.txt*
-vs	surround.txt	/*vs*
 without	solarized.txt	/*without*
 yS	surround.txt	/*yS*
 ySS	surround.txt	/*ySS*

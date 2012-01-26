@@ -1,3 +1,6 @@
-so ~/.vimrc.local
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
 map <D-1> :NERDTreeToggle<CR>
-au FocusLost * :write
+set gfn=Inconsolata:h16

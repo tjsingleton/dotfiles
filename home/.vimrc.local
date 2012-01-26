@@ -3,3 +3,4 @@ cmap w!! w !sudo tee >/dev/null %
 nmap <SPACE> <SPACE>:noh<CR>
 cmap sws :%s/\s\+$//e
 let mapleader = ","
+set shell=/bin/sh
