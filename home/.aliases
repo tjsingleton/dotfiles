@@ -1,22 +1,10 @@
 alias ls="ls -h"
-
 alias cls='clear; ls'
-
 alias curljson='curl -H "Accept: application/json"'
 alias e='exit'
 
-# funeral futurist
-alias carbon_dig="dig @ns1.funeralfuturist.net "
-
 # git
 alias gpull="git stash && git pull --rebase && git stash pop"
-
+alias rebase_develop="git stash; git rebase origin/develop; git stash pop"
 alias external_ip="curl icanhazip.com"
 alias copy_ssh_key="cat .ssh/id_rsa.pub | pbcopy"
-
-# gems
-alias pt="rvm default@cli exec pt"
-
-# mac
-alias ss="/System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine"
-alias lunchy="rvm default@cli exec lunchy"
