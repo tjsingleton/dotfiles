@@ -1,5 +1,5 @@
 export CLICOLOR=1;
-export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:$PATH
+export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/share/python:$PATH
 export TZ="America/New_York"
 export EDITOR='vim'
 export LC_ALL='en_US.UTF-8'

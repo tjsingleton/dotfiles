@@ -1,6 +1,0 @@
-if filereadable(expand("~/.vimrc.local"))
-  source ~/.vimrc.local
-endif
-
-map <D-1> :NERDTreeToggle<CR>
-set gfn=Inconsolata:h16
