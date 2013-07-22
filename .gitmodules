@@ -7,9 +7,9 @@
 [submodule "home/.vim/bundle/nerdcommenter"]
     path = home/.vim/bundle/nerdcommenter
     url = git@github.com:scrooloose/nerdcommenter.git
-[submodule "home/.vim/bundle/vim-futigive"]
+[submodule "home/.vim/bundle/vim-fugitive"]
     path = home/.vim/bundle/vim-fugitive
-    url = git@github.com:tpope/vim-futigive.git            
+    url = git@github.com:tpope/vim-fugitive.git            
 [submodule "home/.vim/bundle/vim-repeat"]
     path = home/.vim/bundle/vim-repeat
     url = git@github.com:tpope/vim-repeat.git            
