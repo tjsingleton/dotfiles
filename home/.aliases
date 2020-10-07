@@ -2,9 +2,80 @@ alias ls="ls -h"
 alias cls='clear; ls'
 alias curljson='curl -H "Accept: application/json"'
 alias e='exit'
-
-# git
-alias gpull="git stash && git pull --rebase && git stash pop"
-alias rebase_develop="git stash; git rebase origin/develop; git stash pop"
-alias external_ip="curl icanhazip.com"
+alias external_ip="curl ip4.icanhazip.com"
 alias copy_ssh_key="cat .ssh/id_rsa.pub | pbcopy"
+
+# GR
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+alias tf-dir="cd $GR_HOME/dpw/terraforming/grnds-environments/"
+
+function gr-cd {
+  cd $GR_HOME/$1
+} 
+
+function which-env {
+  if [ -z "$1" ];  then
+    echo "Usage: which-env [aws-account-id]"
+    return 1
+  fi
+  
+  grep "$1" ~/.aws/access_list | cut -d' '  -f1,2
+}
+
+function tf-ws {
+  if [ -z "$1" ];  then
+    echo "Usage: tf-ws [aws-account-name]"
+    return 1
+  fi
+  
+  aws-environment $1
+  terraform workspace select $1
+}
+
+function update-kubeconfig {
+  if [ -z "$1" ];  then
+    echo "Usage: update-kubeconfig [aws-account-name]"
+    return 1
+  fi
+  
+  aws-environment $1
+  aws eks update-kubeconfig --name $1-eks-cluster
+  
+  if [ -d .terraform ]; then
+    terraform workspace select $1
+  fi
+}
+
+unalias gr 2> /dev/null
+
+function tf-vault-apply {
+  terraform workspace select $AWS_ENVIRONMENT && \
+    export VAULT_ADDR=https://vault.${AWS_ENVIRONMENT:?}.grnds.com && \
+    export VAULT_TOKEN=$(vault login -token-only -tls-skip-verify -method=aws role=$AWS_ENVIRONMENT_ROLE) && \
+    echo $VAULT_TOKEN && \
+    terraform apply
+}
+
+function k8s-shell {
+  kubectl exec -n tj-temp -it $(kubectl -n tj-temp get pods -l app=tj-temp -o=jsonpath="{.items[0].metadata.name}") /bin/bash
+}
+
+function kpod-name {
+  namespace=$1
+  app=$2
+  
+  kubectl get pods -n "$namespace" -l "app=$app" -o=jsonpath="{.items[0].metadata.name}" 
+}
+
+function kexec {
+  namespace=$1
+  name=$2
+  shell=${3:-bash}
+  
+  kubectl exec -n $namespace -it $(kpod-name $namespace $name) $shell
+}
+
+alias k=kubectl

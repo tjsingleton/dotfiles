@@ -1,12 +1,36 @@
 export CLICOLOR=1;
-export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/share/python:$PATH
+export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$HOME/go/bin:$PATH
 export TZ="America/New_York"
 export EDITOR='vim'
 export LC_ALL='en_US.UTF-8'
 
-export NODE_PATH=/usr/local/lib/node
-export PGOPTIONS='-c client_min_messages=WARNING'
-export JRUBY_OPTS="--1.9"
-export ANT_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
-if [[ -s $HOME/.profile_aws ]] ; then source $HOME/.profile_aws ; fi
+export AWS_DEFAULT_REGION=us-east-1
+
+#Determine where a shell function is defined / declared
+function find_function {
+  shopt -s extdebug
+  declare -F "$1"
+  shopt -u extdebug
+}
+
+# Load everything from profile.d folder
+for file in ${HOME}/.profile.d/*.sh; do
+  source ${file};
+done
+
+export PATH=$PATH:$GR_HOME/engineering/bin
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+
+
+jira-environment; tracker-environment
+
+. /usr/local/opt/asdf/asdf.sh
+[ -f /usr/local/opt/dvm/dvm.sh ] && . /usr/local/opt/dvm/dvm.sh
+
+export GITHUB_USER=tjsingleton
+
+
+ulimit -n 1024
