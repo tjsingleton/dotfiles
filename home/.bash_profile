@@ -7,3 +7,5 @@ export HISTIGNORE="fg*"
 bind '"\C-x": "fg %-\n"'
 
 [[ -r ~/.bashrc ]] && source ~/.bashrc
+
+. "$HOME/.local/bin/env"

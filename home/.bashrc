@@ -39,3 +39,5 @@ shopt -s checkwinsize
 # This loads the Included Health shell augmentations into your interactive shell
 . "$HOME/.ih/augment.sh"
 
+
+. "$HOME/.local/bin/env"
