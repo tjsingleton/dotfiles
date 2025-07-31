@@ -9,6 +9,15 @@ dotfiles_log() {
   fi
 }
 
+# Set Oh My Zsh environment variables early
+DISABLE_AUTO_TITLE=true
+DISABLE_UNTRACKED_FILES_DIRTY=true
+ZSH_THEME_GIT_PROMPT_BEHIND=""
+DISABLE_AUTO_UPDATE=true
+DISABLE_UPDATE_PROMPT=true
+DISABLE_GIT_PROMPT_ASYNC=true
+ZSH_DISABLE_COMPFIX=true
+
 dotfiles_log "Loading .profile..."
 
 export CLICOLOR=1;
@@ -32,6 +41,8 @@ function find_function {
 # Load everything from profile.d folder (if it exists)
 if [ -d "${HOME}/.profile.d" ]; then
   dotfiles_log "Loading .profile.d scripts..."
+  # Use nullglob to handle case when no .sh files exist
+  shopt -s nullglob 2>/dev/null || true
   for file in ${HOME}/.profile.d/*.sh; do
     if [ -f "$file" ]; then
       dotfiles_log "Sourcing $file"

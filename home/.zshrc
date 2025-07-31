@@ -1,5 +1,5 @@
 # Enable error handling for zsh dotfiles
-setopt ERR_EXIT
+# setopt ERR_EXIT  # Temporarily disabled for debugging
 export DOTFILES_DEBUG=1
 
 # Function to log dotfiles operations
@@ -12,20 +12,20 @@ dotfiles_log() {
 dotfiles_log "Loading .zshrc..."
 
 export ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="sunaku"
 
-# Disable auto title and untracked files dirty to prevent error messages
-export DISABLE_AUTO_TITLE="true"
-export DISABLE_UNTRACKED_FILES_DIRTY="true"
-export ZSH_THEME_GIT_PROMPT_BEHIND=""
+
 
 plugins=(brew gem)
 
 dotfiles_log "Loading Oh My Zsh..."
-source $ZSH/oh-my-zsh.sh || {
-  echo "[DOTFILES ERROR] Failed to load Oh My Zsh" >&2
-  return 1
-}
+# Temporarily disable Oh My Zsh to test basic functionality
+# DISABLE_UPDATE_PROMPT=true ZSH_DISABLE_COMPFIX=true source $ZSH/oh-my-zsh.sh || {
+#   echo "[DOTFILES ERROR] Failed to load Oh My Zsh" >&2
+#   return 1
+# }
+
+# Set theme after Oh My Zsh is loaded
+# export ZSH_THEME="minimal"
 
 dotfiles_log "Loading .profile..."
 source $HOME/.profile || {
