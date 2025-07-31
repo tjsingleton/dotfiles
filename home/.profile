@@ -41,9 +41,9 @@ function find_function {
 # Load everything from profile.d folder (if it exists)
 if [ -d "${HOME}/.profile.d" ]; then
   dotfiles_log "Loading .profile.d scripts..."
-  # Check if there are any .sh files in the directory
-  if ls "${HOME}/.profile.d"/*.sh 1>/dev/null 2>&1; then
-    for file in "${HOME}/.profile.d"/*.sh; do
+  # Use find to avoid glob expansion issues
+  if [ -n "$(find "${HOME}/.profile.d" -maxdepth 1 -name "*.sh" -print -quit)" ]; then
+    for file in $(find "${HOME}/.profile.d" -maxdepth 1 -name "*.sh" -print); do
       if [ -f "$file" ]; then
         dotfiles_log "Sourcing $file"
         source "$file" || {
