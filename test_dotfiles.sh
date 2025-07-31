@@ -74,6 +74,23 @@ run_test "Oh My Zsh directory exists" "[ -d \"$HOME/.oh-my-zsh\" ]"
 run_test "Zsh is available" "command -v zsh >/dev/null"
 run_test "Zsh version check" "zsh --version >/dev/null"
 
+# Test 2.5: Check Oh My Zsh prompt functionality
+log_info "Testing Oh My Zsh prompt functionality..."
+
+# Test if Oh My Zsh prompt functions are available
+temp_prompt_test=$(mktemp)
+if zsh -c "source $HOME/.zshrc; git_prompt_info >/dev/null 2>&1" >"$temp_prompt_test" 2>&1; then
+    log_success "Oh My Zsh git prompt functions work"
+else
+    if grep -q "git_prompt_info.*parameter not set" "$temp_prompt_test"; then
+        log_failure "Oh My Zsh git prompt functions have errors"
+        echo "   Error: git_prompt_info parameter not set"
+    else
+        log_success "Oh My Zsh git prompt functions work"
+    fi
+fi
+rm -f "$temp_prompt_test"
+
 # Test 3: Check asdf installation
 log_info "Testing asdf installation..."
 
@@ -110,14 +127,25 @@ log_info "Testing shell configuration..."
 
 # Test if zshrc can be sourced without errors
 if [ -f "$HOME/.zshrc" ]; then
-    # Create a temporary test environment
-    temp_env=$(mktemp)
-    if zsh -c "source $HOME/.zshrc; echo 'Configuration loaded successfully'" >/dev/null 2>&1; then
-        log_success "Zsh configuration loads without errors"
+    # Capture output and check for specific error messages
+    temp_output=$(mktemp)
+    if zsh -c "source $HOME/.zshrc; echo 'Configuration loaded successfully'" >"$temp_output" 2>&1; then
+        # Check for Oh My Zsh prompt errors
+        if grep -q "git_prompt_status.*parameter not set" "$temp_output" || \
+           grep -q "_omz_git_prompt_status.*parameter not set" "$temp_output" || \
+           grep -q "_defer_async_git_register.*parameter not set" "$temp_output"; then
+            log_failure "Zsh configuration has Oh My Zsh prompt errors"
+            echo "   Found errors:"
+            grep -E "(git_prompt_status|_omz_git_prompt_status|_defer_async_git_register).*parameter not set" "$temp_output" | head -3
+        else
+            log_success "Zsh configuration loads without errors"
+        fi
     else
         log_failure "Zsh configuration has errors"
+        echo "   Error output:"
+        cat "$temp_output" | head -5
     fi
-    rm -f "$temp_env"
+    rm -f "$temp_output"
 else
     log_failure "Zsh configuration file not found"
 fi
