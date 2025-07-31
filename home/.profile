@@ -95,9 +95,9 @@ ulimit -n 1024
 if [ -n "$CURSOR_SESSION_ID" ]; then
   dotfiles_log "Cursor detected - applying optimizations"
   export GIT_PAGER=""
-  export EDITOR="nano"
-  export GIT_EDITOR="nano"
-  export VISUAL="nano"
+  export EDITOR="cursor"
+  export GIT_EDITOR="cursor"
+  export VISUAL="cursor"
 fi
 
 dotfiles_log ".profile loaded successfully"
