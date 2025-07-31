@@ -1,6 +1,6 @@
 # Enable error handling for zsh dotfiles
 # setopt ERR_EXIT  # Temporarily disabled for debugging
-export DOTFILES_DEBUG=1
+export DOTFILES_DEBUG=0
 
 # Function to log dotfiles operations
 dotfiles_log() {

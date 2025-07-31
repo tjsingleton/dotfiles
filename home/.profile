@@ -1,6 +1,6 @@
 # Enable error handling and verbose output for dotfiles
 set -euo pipefail
-export DOTFILES_DEBUG=1
+export DOTFILES_DEBUG=0
 
 # Function to log dotfiles operations
 dotfiles_log() {
