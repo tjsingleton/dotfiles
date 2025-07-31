@@ -3,8 +3,6 @@
 # Simple test runner for dotfiles
 # Usage: ./test_runner.sh [test_name]
 
-set -euo pipefail
-
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TEST_SCRIPT="$SCRIPT_DIR/test_dotfiles.sh"
 
