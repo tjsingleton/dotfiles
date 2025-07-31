@@ -79,3 +79,19 @@ function kexec {
 }
 
 alias k=kubectl
+
+
+function gp-stop {
+	launchctl unload /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
+}
+
+function gp-start {
+	launchctl load /Library/LaunchAgents/com.paloaltonetworks.gp.pangp*
+}
+
+alias kdn="kubectl describe node "
+
+
+function jwt-decode() {                                                
+  sed 's/\./\n/g' <<< $(cut -d. -f1,2 <<< $1) | base64 --decode | jq
+}

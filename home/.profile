@@ -1,5 +1,5 @@
 export CLICOLOR=1;
-export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$HOME/go/bin:$PATH
+export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH
 export TZ="America/New_York"
 export EDITOR='vim'
 export LC_ALL='en_US.UTF-8'
@@ -7,30 +7,16 @@ export LC_ALL='en_US.UTF-8'
 export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export AWS_DEFAULT_REGION=us-east-1
 
-#Determine where a shell function is defined / declared
-function find_function {
-  shopt -s extdebug
-  declare -F "$1"
-  shopt -u extdebug
-}
-
-# Load everything from profile.d folder
-for file in ${HOME}/.profile.d/*.sh; do
-  source ${file};
-done
-
-export PATH=$PATH:$GR_HOME/engineering/bin
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="$PATH:$HOME/.rd/bin"
 
 
-jira-environment; tracker-environment
+export OPSLEVEL_API_TOKEN="X8k0EggqDNwKueSgKjNo0sgx3DNPiQNtSJw6"
+export DOCKER_BUILDKIT=1
 
-. /usr/local/opt/asdf/asdf.sh
-[ -f /usr/local/opt/dvm/dvm.sh ] && . /usr/local/opt/dvm/dvm.sh
+source ~/.aliases
 
-export GITHUB_USER=tjsingleton
-
-
-ulimit -n 1024
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export IH_PRE_COMMIT_AUTO_STAGE=true

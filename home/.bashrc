@@ -35,3 +35,7 @@ shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# This loads the Included Health shell augmentations into your interactive shell
+. "$HOME/.ih/augment.sh"
+

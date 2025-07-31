@@ -6,3 +6,4 @@ source $HOME/.bashrc
 export HISTIGNORE="fg*"
 bind '"\C-x": "fg %-\n"'
 
+[[ -r ~/.bashrc ]] && source ~/.bashrc

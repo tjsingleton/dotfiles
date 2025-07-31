@@ -80,3 +80,5 @@ vendor/ruby
 .generators
 .rakeTasks
 
+
+.history/*
