@@ -14,6 +14,11 @@ dotfiles_log "Loading .zshrc..."
 export ZSH=$HOME/.oh-my-zsh
 export ZSH_THEME="sunaku"
 
+# Disable auto title and untracked files dirty to prevent error messages
+export DISABLE_AUTO_TITLE="true"
+export DISABLE_UNTRACKED_FILES_DIRTY="true"
+export ZSH_THEME_GIT_PROMPT_BEHIND=""
+
 plugins=(brew gem)
 
 dotfiles_log "Loading Oh My Zsh..."
