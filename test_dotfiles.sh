@@ -181,6 +181,18 @@ for pattern in "${error_patterns[@]}"; do
     fi
 done
 
+# Test homesick link status
+log_info "Testing homesick link status..."
+
+homesick_output=$(homesick link dotfiles 2>&1)
+if echo "$homesick_output" | grep -q "conflict"; then
+    log_failure "Homesick link reports conflicts: $homesick_output"
+elif echo "$homesick_output" | grep -q "identical\|symlink"; then
+    log_success "Homesick link reports no conflicts (all files properly linked)"
+else
+    log_failure "Unexpected homesick link output: $homesick_output"
+fi
+
 # Summary
 echo
 echo "=========================================="
