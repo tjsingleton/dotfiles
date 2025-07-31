@@ -135,6 +135,52 @@ run_test "Zshrc is readable" "[ -r \"$HOME/.zshrc\" ]"
 run_test "Profile is readable" "[ -r \"$HOME/.profile\" ]"
 run_test "Aliases is readable" "[ -r \"$HOME/.aliases\" ]"
 
+# Test 11: Check for startup errors
+log_info "Testing startup error detection..."
+
+# Test sourcing .profile without errors
+profile_output=$(source ~/.profile 2>&1)
+if [ $? -eq 0 ] && [ -z "$profile_output" ]; then
+    log_success "Profile loads without errors"
+else
+    log_failure "Profile has errors: $profile_output"
+fi
+
+# Test sourcing .aliases without errors
+aliases_output=$(source ~/.aliases 2>&1)
+if [ $? -eq 0 ] && [ -z "$aliases_output" ]; then
+    log_success "Aliases load without errors"
+else
+    log_failure "Aliases have errors: $aliases_output"
+fi
+
+# Test that shell doesn't exit on command failures (set -e should be disabled)
+test_command="command_that_does_not_exist 2>/dev/null; echo 'shell_continues'"
+test_output=$(zsh -c "$test_command" 2>&1)
+if echo "$test_output" | grep -q "shell_continues"; then
+    log_success "Shell continues after command failures (set -e disabled)"
+else
+    log_failure "Shell exits on command failures (set -e enabled)"
+fi
+
+# Test for specific error patterns
+error_patterns=(
+    "no matches found"
+    "parameter not set"
+    "command not found.*profile"
+    "command not found.*zshrc"
+    "syntax error"
+)
+
+for pattern in "${error_patterns[@]}"; do
+    # Check .profile for errors
+    if source ~/.profile 2>&1 | grep -q "$pattern"; then
+        log_failure "Profile contains error pattern: $pattern"
+    else
+        log_success "Profile clean of error pattern: $pattern"
+    fi
+done
+
 # Summary
 echo
 echo "=========================================="
