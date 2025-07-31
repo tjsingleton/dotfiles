@@ -1,5 +1,44 @@
 # TODO
 
+## Current State (Latest Changes)
+- **Commit Hash**: 6f0d1fb
+- **Commit Message**: Fix zsh prompt error messages by adding missing environment variables
+- **Date**: $(date)
+
+## Rollback Instructions
+If we need to rollback to the previous state:
+```bash
+git reset --hard 0f0e739
+```
+
+## Latest Changes Made
+- .aliases: Add GP (GlobalProtect) start/stop functions, kubectl node describe alias, and JWT decode function
+- .bash_profile: Add bashrc source line for better shell initialization
+- .bashrc: Add Included Health shell augmentations
+- .gitignore: Add .history/* pattern to ignore shell history files
+- .profile: 
+  * Remove AWS region and old environment functions
+  * Add OpsLevel API token and Docker BuildKit settings
+  * Add ASDF Go module versioning and Krew binary path
+  * Add Included Health pre-commit auto-stage setting
+  * Remove old profile.d loading and Jira/tracker environment
+  * Add source ~/.aliases for consistent alias loading
+- .zshrc: 
+  * Simplify plugins list (remove rails3, redis-cli, rvm, vagrant, npm, knife)
+  * Add Included Health shell augmentations
+  * Remove RVM auto_name_dirs fix (no longer needed)
+  * Fix zsh prompt error messages (DISABLE_AUTO_TITLE, DISABLE_UNTRACKED_FILES_DIRTY, ZSH_THEME_GIT_PROMPT_BEHIND)
+
+## Testing Checklist (Latest Changes)
+- [x] Test new GP (GlobalProtect) functions: gp-start, gp-stop
+- [x] Test kubectl node describe alias: kdn
+- [x] Test JWT decode function: jwt-decode
+- [x] Verify shell initialization works correctly
+- [x] Check that Included Health augmentations load properly
+- [x] Verify environment variables are set correctly
+- [x] Test that removed plugins don't cause issues
+- [x] Fix zsh prompt error messages (DISABLE_AUTO_TITLE, DISABLE_UNTRACKED_FILES_DIRTY, ZSH_THEME_GIT_PROMPT_BEHIND)
+
 ## Work Configuration (Optional Future Improvements)
 - [ ] Create separate work configuration file (e.g., `.work-profile` or `.work-aliases`)
 - [ ] Move work-specific settings out of main dotfiles
@@ -19,6 +58,8 @@
 - ✅ Cursor-specific editor optimizations implemented
 - ✅ Comprehensive error handling and debug logging implemented
 - ✅ All changes committed and pushed to remote repository
+- ✅ New shell functions and aliases working (GP, kubectl, JWT decode)
+- ✅ Zsh prompt error messages fixed
 
 ## Completed Tasks
 1. ✅ Fixed asdf path in .profile
@@ -35,6 +76,8 @@
 12. ✅ Implemented debug logging system for troubleshooting
 13. ✅ Fixed work-specific aliases to use environment detection
 14. ✅ Updated documentation and TODO list
+15. ✅ Added new shell functions (GP start/stop, kubectl node describe, JWT decode)
+16. ✅ Fixed zsh prompt error messages
 
 ## Installation Complete! 🎉
 Your dotfiles are now fully installed and working on your personal machine. All core functionality is operational:
@@ -47,6 +90,8 @@ Your dotfiles are now fully installed and working on your personal machine. All 
 - Cursor-specific editor optimizations (nano for git operations)
 - Comprehensive error handling and debug logging
 - All changes successfully committed and pushed
+- New shell functions for VPN management, kubectl operations, and JWT decoding
+- Clean zsh prompt without error messages
 
 ## Error Handling Features
 The dotfiles now include comprehensive error handling:
@@ -67,6 +112,12 @@ When Cursor is detected (`CURSOR_SESSION_ID` is set), the following optimization
 - **Visual Editor**: Set to `nano` as fallback
 
 This provides a much better experience when working with git operations in Cursor, avoiding the vim display issues and pager interface.
+
+## New Shell Functions Added
+- **gp-start**: Start GlobalProtect VPN service
+- **gp-stop**: Stop GlobalProtect VPN service  
+- **kdn**: Alias for `kubectl describe node`
+- **jwt-decode**: Function to decode JWT tokens
 
 ## Next Steps (Optional)
 The dotfiles are production-ready and fully functional. The remaining tasks are optional organizational improvements:
