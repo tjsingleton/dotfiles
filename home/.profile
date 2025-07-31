@@ -1,5 +1,5 @@
 # Enable error handling and verbose output for dotfiles
-set -euo pipefail
+set -eo pipefail
 export DOTFILES_DEBUG=0
 
 # Function to log dotfiles operations

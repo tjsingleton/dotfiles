@@ -1,6 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
+# Set Oh My Zsh environment variables to prevent parameter errors
+export DISABLE_UPDATE_PROMPT=true
+export ZSH_DISABLE_COMPFIX=true
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -72,6 +76,9 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Source .profile for additional configuration
+source $HOME/.profile
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
