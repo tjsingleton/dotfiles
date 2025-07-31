@@ -10,11 +10,14 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-alias tf-dir="cd $GR_HOME/dpw/terraforming/grnds-environments/"
+# Work-specific aliases (only if GR_HOME is set)
+if [ -n "${GR_HOME:-}" ]; then
+  alias tf-dir="cd $GR_HOME/dpw/terraforming/grnds-environments/"
 
-function gr-cd {
-  cd $GR_HOME/$1
-} 
+  function gr-cd {
+    cd $GR_HOME/$1
+  }
+fi 
 
 function which-env {
   if [ -z "$1" ];  then

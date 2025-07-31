@@ -1,3 +1,16 @@
+# Enable error handling and verbose output for dotfiles
+set -euo pipefail
+export DOTFILES_DEBUG=1
+
+# Function to log dotfiles operations
+dotfiles_log() {
+  if [ "${DOTFILES_DEBUG:-0}" = "1" ]; then
+    echo "[DOTFILES] $*" >&2
+  fi
+}
+
+dotfiles_log "Loading .profile..."
+
 export CLICOLOR=1;
 export PATH=./bin:$HOME/bin:/usr/local/sbin:/usr/local/bin:$PATH
 export TZ="America/New_York"
@@ -18,8 +31,15 @@ function find_function {
 
 # Load everything from profile.d folder (if it exists)
 if [ -d "${HOME}/.profile.d" ]; then
+  dotfiles_log "Loading .profile.d scripts..."
   for file in ${HOME}/.profile.d/*.sh; do
-    [ -f "$file" ] && source ${file};
+    if [ -f "$file" ]; then
+      dotfiles_log "Sourcing $file"
+      source "$file" || {
+        echo "[DOTFILES ERROR] Failed to source $file" >&2
+        return 1
+      }
+    fi
   done
 fi
 
@@ -28,21 +48,44 @@ export PATH="$PATH:$HOME/.rd/bin"
 
 # Work-specific settings (only load if GR_HOME is set)
 if [ -n "$GR_HOME" ]; then
+  dotfiles_log "Loading work-specific settings (GR_HOME: $GR_HOME)"
   export PATH=$PATH:$GR_HOME/engineering/bin
-  jira-environment; tracker-environment
+  jira-environment || {
+    echo "[DOTFILES ERROR] Failed to load jira-environment" >&2
+    return 1
+  }
+  tracker-environment || {
+    echo "[DOTFILES ERROR] Failed to load tracker-environment" >&2
+    return 1
+  }
 fi
 
 export OPSLEVEL_API_TOKEN="X8k0EggqDNwKueSgKjNo0sgx3DNPiQNtSJw6"
 export DOCKER_BUILDKIT=1
 
-source ~/.aliases
+dotfiles_log "Loading .aliases..."
+source ~/.aliases || {
+  echo "[DOTFILES ERROR] Failed to source ~/.aliases" >&2
+  return 1
+}
 
 export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export IH_PRE_COMMIT_AUTO_STAGE=true
 
-. /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh
-[ -f /usr/local/opt/dvm/dvm.sh ] && . /usr/local/opt/dvm/dvm.sh
+dotfiles_log "Loading asdf..."
+. /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh || {
+  echo "[DOTFILES ERROR] Failed to load asdf" >&2
+  return 1
+}
+
+if [ -f /usr/local/opt/dvm/dvm.sh ]; then
+  dotfiles_log "Loading dvm..."
+  . /usr/local/opt/dvm/dvm.sh || {
+    echo "[DOTFILES ERROR] Failed to load dvm" >&2
+    return 1
+  }
+fi
 
 export GITHUB_USER=tjsingleton
 
@@ -50,8 +93,11 @@ ulimit -n 1024
 
 # Cursor-specific optimizations
 if [ -n "$CURSOR_SESSION_ID" ]; then
+  dotfiles_log "Cursor detected - applying optimizations"
   export GIT_PAGER=""
   export EDITOR="nano"
   export GIT_EDITOR="nano"
   export VISUAL="nano"
 fi
+
+dotfiles_log ".profile loaded successfully"
