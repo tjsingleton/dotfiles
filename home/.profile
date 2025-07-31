@@ -16,10 +16,12 @@ function find_function {
   shopt -u extdebug
 }
 
-# Load everything from profile.d folder
-for file in ${HOME}/.profile.d/*.sh; do
-  source ${file};
-done
+# Load everything from profile.d folder (if it exists)
+if [ -d "${HOME}/.profile.d" ]; then
+  for file in ${HOME}/.profile.d/*.sh; do
+    [ -f "$file" ] && source ${file};
+  done
+fi
 
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="$PATH:$HOME/.rd/bin"
@@ -46,7 +48,10 @@ export GITHUB_USER=tjsingleton
 
 ulimit -n 1024
 
-# Disable git pager when Cursor is detected
+# Cursor-specific optimizations
 if [ -n "$CURSOR_SESSION_ID" ]; then
   export GIT_PAGER=""
+  export EDITOR="nano"
+  export GIT_EDITOR="nano"
+  export VISUAL="nano"
 fi
