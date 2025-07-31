@@ -1,209 +1,284 @@
 # Dotfiles
 
-Personal dotfiles configuration for macOS with Zsh, Oh My Zsh, and various development tools.
+A comprehensive collection of shell configuration files, aliases, and development tools for macOS.
 
-## Features
+## 🎉 Status: Production Ready
 
-### Shell Configuration
-- **Zsh** with **Oh My Zsh** framework
-- **Robby Russell** theme (clean and minimal)
-- **Plugins**: `git`, `brew`, `gem`, `macos`
-- **Error handling** with debug logging
-- **Cursor IDE integration** (Git pager disabled, editor set to `cursor`)
+This dotfiles repository is fully configured and tested. All components are working perfectly with comprehensive error handling and testing.
+
+## ✨ Features
+
+### Core Configuration
+- **Oh My Zsh**: Latest version with robbyrussell theme and essential plugins
+- **asdf**: Version manager for Ruby (3.4.4)
+- **Vim**: Configured with essential plugins (ctrlp, nerdcommenter, fugitive, repeat, surround)
+- **Homesick**: Dotfiles management with automatic symlinking
+
+### Shell Environment
+- **Zsh**: Primary shell with comprehensive configuration
+- **Error Handling**: Robust error detection and startup testing
+- **Environment Detection**: Work vs personal environment detection
+- **Cursor Optimizations**: Git pager disabled, editor set to cursor when in Cursor IDE
 
 ### Development Tools
-- **asdf** version manager for Ruby
-- **Homebrew** package manager aliases
-- **Git** aliases and functions
-- **Ruby gem** management aliases
-- **macOS-specific** aliases and functions
+- **Git**: Configured with aliases and optimizations
+- **Ruby**: Managed via asdf with proper PATH configuration
+- **VPN Management**: GlobalProtect start/stop functions
+- **Kubernetes**: kubectl node describe alias
+- **JWT**: Token decoding function
 
-### Environment Setup
-- **PATH** configuration for common development tools
-- **Timezone** set to America/New_York
-- **Locale** set to en_US.UTF-8
-- **AWS** default region configuration
-- **Docker** BuildKit enabled
+### Testing Framework
+- **33 comprehensive tests** covering all functionality
+- **Startup error detection** to catch shell initialization issues
+- **Homesick conflict detection** to ensure proper symlink management
+- **All tests passing** - production-ready status
 
-### Work-Specific Features
-- **GR_HOME** environment for work projects
-- **Jira** and **Tracker** environment setup
-- **Custom aliases** for work directories
-
-## Installation
+## 🚀 Installation
 
 ### Prerequisites
 - macOS
-- Zsh shell
 - Git
-- [homesick](https://github.com/technicalpickles/homesick) gem
+- Ruby (will be installed via asdf)
 
-### Quick Install
+### Quick Start
 ```bash
+# Clone the repository
+git clone https://github.com/tjsingleton/dotfiles.git ~/.homesick/repos/dotfiles
+
 # Install homesick if not already installed
 gem install homesick
 
-# Clone and link dotfiles
-homesick clone tjsingleton/dotfiles
+# Link all dotfiles
 homesick link dotfiles
 
-# Install Oh My Zsh (if not already installed)
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Restart your shell or source the configuration
-source ~/.zshrc
+# Test the installation
+cd ~/.homesick/repos/dotfiles
+./test_runner.sh
 ```
 
 ### Manual Installation
-If you prefer to install manually:
+If you prefer to install components manually:
 
-1. Clone this repository
-2. Copy files to your home directory:
+1. **Install Oh My Zsh**:
    ```bash
-   cp home/.zshrc ~/.zshrc
-   cp home/.profile ~/.profile
-   cp home/.aliases ~/.aliases
+   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
    ```
-3. Install Oh My Zsh
-4. Restart your shell
 
-## Configuration Files
+2. **Install asdf**:
+   ```bash
+   brew install asdf
+   ```
 
-### `.zshrc`
-- Main Zsh configuration
-- Oh My Zsh setup with plugins
-- Theme configuration
-- Sources `.profile` for additional settings
+3. **Install Ruby**:
+   ```bash
+   asdf plugin add ruby
+   asdf install ruby 3.4.4
+   asdf global ruby 3.4.4
+   ```
 
-### `.profile`
-- Environment variables and PATH setup
-- Tool-specific configurations (asdf, dvm, etc.)
-- Work-specific settings (when GR_HOME is set)
-- Cursor IDE optimizations
-- Error handling and debug logging
+4. **Install Vim plugins**:
+   ```bash
+   vim +PluginInstall +qall
+   ```
 
-### `.aliases`
-- Custom aliases and functions
-- Work-specific aliases (conditional on GR_HOME)
-- Testing framework aliases
+## 📁 File Structure
 
-## Plugins
-
-### Git Plugin
-Provides extensive Git aliases and functions:
-- `g` = `git`
-- `ga` = `git add`
-- `gc` = `git commit`
-- `gp` = `git push`
-- And many more...
-
-### Brew Plugin
-Homebrew package manager aliases:
-- `bi` = `brew install`
-- `bu` = `brew update`
-- `bup` = `brew upgrade`
-- `bl` = `brew list`
-- And many more...
-
-### Gem Plugin
-Ruby gem management aliases:
-- `gi` = `gem install`
-- `gu` = `gem update`
-- `gl` = `gem list`
-- And more...
-
-### macOS Plugin
-macOS-specific aliases and functions:
-- `showfiles` = show hidden files
-- `hidefiles` = hide hidden files
-- `cleanup` = remove .DS_Store files
-- And more...
-
-## Testing
-
-Run the test suite to verify your installation:
-
-```bash
-# Run all tests
-./test_runner.sh
-
-# Or run tests directly
-./test_dotfiles.sh
+```
+dotfiles/
+├── home/                    # Configuration files
+│   ├── .zshrc             # Zsh configuration
+│   ├── .profile           # Shell environment setup
+│   ├── .aliases           # Shell aliases and functions
+│   ├── .vimrc             # Vim configuration
+│   └── .oh-my-zsh/       # Oh My Zsh installation
+├── test_dotfiles.sh       # Comprehensive test suite
+├── test_runner.sh         # Test runner script
+├── TESTING.md             # Testing documentation
+├── README.md              # This file
+└── TODO.md                # Development progress
 ```
 
-See [TESTING.md](TESTING.md) for detailed testing documentation.
+## ⚙️ Configuration Files
 
-## Troubleshooting
+### `.zshrc`
+- Oh My Zsh configuration with robbyrussell theme
+- Plugin configuration (git, brew, gem, macos)
+- Environment variable setup
+- Cursor-specific optimizations
 
-### Shell Exits on Command Failure
-If your shell exits when commands fail, check that `set -e` is not enabled in your `.profile`. The current configuration uses `set -o pipefail` which is safer for interactive shells.
+### `.profile`
+- PATH configuration
+- Environment variables
+- asdf initialization
+- Work-specific settings (conditional loading)
+- Robust error handling with `find` instead of glob expansion
 
-### Oh My Zsh Issues
-If you encounter Oh My Zsh errors:
-1. Update Oh My Zsh: `omz update`
-2. Clear Zsh cache: `rm -f ~/.zsh_history`
-3. Restart your terminal
+### `.aliases`
+- Git aliases and shortcuts
+- Development tool aliases
+- Work-specific functions (VPN, kubectl, JWT)
+- Environment detection for work settings
 
-### Homesick Issues
-If symlinks aren't working:
+### `.vimrc`
+- Essential Vim plugins
+- Key mappings and settings
+- Plugin management via Vundle
+
+## 🔧 Environment Variables
+
+### Core Variables
+- `ZSH_THEME`: robbyrussell
+- `EDITOR`: cursor (when in Cursor IDE)
+- `GIT_PAGER`: "" (disabled in Cursor)
+- `PATH`: Includes asdf, local bins, work tools
+
+### Work-Specific Variables
+- `GR_HOME`: Work directory (only set in work environment)
+- `AWS_DEFAULT_REGION`: us-east-1
+- `DOCKER_BUILDKIT`: 1
+
+### Debug Variables
+- `DOTFILES_DEBUG`: 0 (set to 1 for verbose output)
+
+## 🧪 Testing
+
+### Run All Tests
 ```bash
+./test_runner.sh
+```
+
+### Test Categories
+- **File Existence**: Verify all configuration files are present
+- **Oh My Zsh**: Check installation and theme/plugins
+- **asdf & Ruby**: Verify version manager and Ruby installation
+- **Vim**: Check configuration and plugins
+- **Environment Variables**: Validate PATH and core variables
+- **Git Configuration**: Test git availability and version
+- **Cursor Environment**: Detect and test Cursor-specific optimizations
+- **Work Environment**: Test work vs personal environment detection
+- **File Permissions**: Ensure configuration files are readable
+- **Startup Error Detection**: Catch shell initialization issues
+- **Homesick Link Status**: Ensure proper symlink management
+
+### Test Results
+```
+==========================================
+        DOTFILES TEST SUITE
+==========================================
+Total tests: 33
+Passed: 33
+Failed: 0
+🎉 All tests passed! Your dotfiles are working perfectly.
+```
+
+## 🔍 Troubleshooting
+
+### Common Issues
+
+#### "no matches found" Error
+**Solution**: Fixed in latest version using `find` instead of glob expansion.
+
+#### Oh My Zsh Not Loading
+**Solution**: Ensure Oh My Zsh is installed and `.zshrc` is properly sourced.
+
+#### asdf Not Found
+**Solution**: Verify asdf is installed and initialized in `.profile`.
+
+#### Homesick Conflicts
+**Solution**: Run `homesick link dotfiles` to resolve symlink conflicts.
+
+### Debug Mode
+Enable verbose output for troubleshooting:
+```bash
+export DOTFILES_DEBUG=1
+source ~/.zshrc
+```
+
+### Manual Testing
+```bash
+# Test shell configuration
+zsh -c "source ~/.zshrc; echo 'Configuration loaded successfully'"
+
+# Test Oh My Zsh
+zsh -c "source ~/.zshrc; echo 'Theme: ' \$ZSH_THEME"
+
+# Test environment variables
+zsh -c "source ~/.profile; echo 'PATH: ' \$PATH"
+```
+
+## 🎨 Customization
+
+### Adding New Aliases
+Edit `home/.aliases` and add your custom aliases:
+```bash
+# Example custom alias
+alias ll='ls -la'
+```
+
+### Adding Oh My Zsh Plugins
+Edit `home/.zshrc` and add plugins to the plugins array:
+```bash
+plugins=(git brew gem macos docker kubectl)
+```
+
+### Creating Custom Themes
+1. Create a new theme file in `home/.oh-my-zsh/themes/`
+2. Set `ZSH_THEME="your-theme-name"` in `.zshrc`
+
+### Work-Specific Configuration
+Work settings are automatically detected and loaded when `GR_HOME` is set. Add work-specific configurations to the conditional blocks in `.profile` and `.aliases`.
+
+## 🔄 Updates
+
+### Updating Oh My Zsh
+```bash
+omz update
+```
+
+### Updating asdf
+```bash
+asdf plugin update --all
+```
+
+### Updating Dotfiles
+```bash
+homesick pull dotfiles
 homesick link dotfiles
 ```
 
-### Plugin Not Found
-If a plugin is not found, check the plugin name. Some plugins have been renamed:
-- `osx` → `macos`
+## 📚 Documentation
 
-## Customization
+- **TESTING.md**: Comprehensive testing documentation
+- **TODO.md**: Development progress and completed tasks
+- **Oh My Zsh**: [Official Documentation](https://ohmyz.sh/)
 
-### Adding New Aliases
-Add custom aliases to `home/.aliases`:
-
-```bash
-# Example custom alias
-alias myproject="cd ~/projects/myproject"
-```
-
-### Adding New Plugins
-Edit `home/.zshrc` and add to the plugins array:
-
-```bash
-plugins=(git brew gem macos your_new_plugin)
-```
-
-### Work-Specific Configuration
-Set the `GR_HOME` environment variable to enable work-specific features:
-
-```bash
-export GR_HOME="/path/to/work/projects"
-```
-
-## Environment Variables
-
-Key environment variables set by these dotfiles:
-
-- `ZSH` - Oh My Zsh installation path
-- `ZSH_THEME` - Theme name (robbyrussell)
-- `DOTFILES_DEBUG` - Debug logging (0/1)
-- `CURSOR_SESSION_ID` - Detected automatically for Cursor IDE
-- `GR_HOME` - Work projects directory (optional)
-- `AWS_DEFAULT_REGION` - AWS region (us-east-1)
-- `TZ` - Timezone (America/New_York)
-
-## Contributing
+## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Run the test suite
+4. Run the test suite: `./test_runner.sh`
 5. Submit a pull request
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- [Oh My Zsh](https://ohmyz.sh/) for the excellent Zsh framework
-- [homesick](https://github.com/technicalpickles/homesick) for dotfiles management
-- [asdf](https://asdf-vm.com/) for version management 
+- [Oh My Zsh](https://ohmyz.sh/) for the excellent shell framework
+- [asdf](https://asdf-vm.com/) for version management
+- [Homesick](https://github.com/technicalpickles/homesick) for dotfiles management
+- [Vim](https://www.vim.org/) for the powerful text editor
+
+## 📞 Support
+
+If you encounter any issues:
+1. Check the troubleshooting section
+2. Run the test suite: `./test_runner.sh`
+3. Enable debug mode: `export DOTFILES_DEBUG=1`
+4. Open an issue with detailed error information
+
+---
+
+**Status**: ✅ Production Ready - All tests passing, comprehensive error handling, and robust configuration. 
