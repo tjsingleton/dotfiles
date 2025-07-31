@@ -1,5 +1,4 @@
 # Enable error handling and verbose output for dotfiles
-# Use pipefail but not errexit for interactive shells
 set -o pipefail
 export DOTFILES_DEBUG=0
 
@@ -42,17 +41,20 @@ function find_function {
 # Load everything from profile.d folder (if it exists)
 if [ -d "${HOME}/.profile.d" ]; then
   dotfiles_log "Loading .profile.d scripts..."
-  # Use nullglob to handle case when no .sh files exist
-  shopt -s nullglob 2>/dev/null || true
-  for file in ${HOME}/.profile.d/*.sh; do
-    if [ -f "$file" ]; then
-      dotfiles_log "Sourcing $file"
-      source "$file" || {
-        echo "[DOTFILES ERROR] Failed to source $file" >&2
-        return 1
-      }
-    fi
-  done
+  # Check if there are any .sh files in the directory
+  if ls "${HOME}/.profile.d"/*.sh 1>/dev/null 2>&1; then
+    for file in "${HOME}/.profile.d"/*.sh; do
+      if [ -f "$file" ]; then
+        dotfiles_log "Sourcing $file"
+        source "$file" || {
+          echo "[DOTFILES ERROR] Failed to source $file" >&2
+          return 1
+        }
+      fi
+    done
+  else
+    dotfiles_log "No .sh files found in .profile.d directory"
+  fi
 fi
 
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
@@ -62,18 +64,6 @@ export PATH="$PATH:$HOME/.rd/bin"
 if [ -n "$GR_HOME" ]; then
   dotfiles_log "Loading work-specific settings (GR_HOME: $GR_HOME)"
   export PATH=$PATH:$GR_HOME/engineering/bin
-  
-  # Placeholder functions for work environment commands
-  jira-environment() {
-    dotfiles_log "jira-environment called (placeholder)"
-    return 0
-  }
-  
-  tracker-environment() {
-    dotfiles_log "tracker-environment called (placeholder)"
-    return 0
-  }
-  
   jira-environment || {
     echo "[DOTFILES ERROR] Failed to load jira-environment" >&2
     return 1
@@ -98,21 +88,10 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export IH_PRE_COMMIT_AUTO_STAGE=true
 
 dotfiles_log "Loading asdf..."
-# Try multiple possible asdf locations
-if [ -f "$HOME/.asdf/asdf.sh" ]; then
-  . "$HOME/.asdf/asdf.sh" || {
-    echo "[DOTFILES ERROR] Failed to load asdf from $HOME/.asdf/asdf.sh" >&2
-    return 1
-  }
-elif [ -f "/usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh" ]; then
-  . /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh || {
-    echo "[DOTFILES ERROR] Failed to load asdf from Homebrew location" >&2
-    return 1
-  }
-else
-  echo "[DOTFILES ERROR] asdf not found in expected locations" >&2
+. /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh || {
+  echo "[DOTFILES ERROR] Failed to load asdf" >&2
   return 1
-fi
+}
 
 if [ -f /usr/local/opt/dvm/dvm.sh ]; then
   dotfiles_log "Loading dvm..."
