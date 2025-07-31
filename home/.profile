@@ -1,5 +1,6 @@
 # Enable error handling and verbose output for dotfiles
-set -eo pipefail
+# Use pipefail but not errexit for interactive shells
+set -o pipefail
 export DOTFILES_DEBUG=0
 
 # Function to log dotfiles operations
@@ -61,6 +62,18 @@ export PATH="$PATH:$HOME/.rd/bin"
 if [ -n "$GR_HOME" ]; then
   dotfiles_log "Loading work-specific settings (GR_HOME: $GR_HOME)"
   export PATH=$PATH:$GR_HOME/engineering/bin
+  
+  # Placeholder functions for work environment commands
+  jira-environment() {
+    dotfiles_log "jira-environment called (placeholder)"
+    return 0
+  }
+  
+  tracker-environment() {
+    dotfiles_log "tracker-environment called (placeholder)"
+    return 0
+  }
+  
   jira-environment || {
     echo "[DOTFILES ERROR] Failed to load jira-environment" >&2
     return 1
@@ -85,10 +98,21 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export IH_PRE_COMMIT_AUTO_STAGE=true
 
 dotfiles_log "Loading asdf..."
-. /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh || {
-  echo "[DOTFILES ERROR] Failed to load asdf" >&2
+# Try multiple possible asdf locations
+if [ -f "$HOME/.asdf/asdf.sh" ]; then
+  . "$HOME/.asdf/asdf.sh" || {
+    echo "[DOTFILES ERROR] Failed to load asdf from $HOME/.asdf/asdf.sh" >&2
+    return 1
+  }
+elif [ -f "/usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh" ]; then
+  . /usr/local/Cellar/asdf/0.16.7/libexec/asdf.sh || {
+    echo "[DOTFILES ERROR] Failed to load asdf from Homebrew location" >&2
+    return 1
+  }
+else
+  echo "[DOTFILES ERROR] asdf not found in expected locations" >&2
   return 1
-}
+fi
 
 if [ -f /usr/local/opt/dvm/dvm.sh ]; then
   dotfiles_log "Loading dvm..."
